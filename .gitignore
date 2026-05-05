@@ -1,0 +1,19 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Manual de identidad (no necesario para la web)
+assets/MCB Branding/MANUAL DE USO/
+
+# Zip original
+*.zip
+
+# Carpetas vacías iniciales
+assets/logos/
+assets/personajes/
+
+# Capturas de pantalla de referencia
+mcb elementos/
+
+# Archivos de entorno
+.env
