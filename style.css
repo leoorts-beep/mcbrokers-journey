@@ -1097,6 +1097,59 @@ body {
   line-height: 1.25;
 }
 
+/* ── Tiempo Estimado Widget ────────────────────────────────── */
+.tiempo-widget {
+  background: var(--mcb-azul-xlight);
+  border: 1.5px solid var(--mcb-gris-borde);
+  border-left: 4px solid var(--mcb-verde);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 32px;
+}
+
+.tiempo-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.tiempo-icon {
+  font-size: 32px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tiempo-titulo {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mcb-gris-suave);
+  margin-bottom: 2px;
+}
+
+.tiempo-rango {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--mcb-azul);
+  letter-spacing: -0.3px;
+  font-family: var(--font-brand);
+}
+
+.tiempo-razones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tiempo-razon {
+  font-size: 13px;
+  color: var(--mcb-gris-medio);
+  line-height: 1.5;
+  padding-left: 4px;
+}
+
 /* ── Summary secciones ─────────────────────────────────────── */
 .summary-section {
   margin-bottom: 28px;
@@ -1486,6 +1539,176 @@ body {
   .char-img--hero   { height: 160px; }
   .char-img--medium { height: 130px; }
   .char-img--small  { height: 100px; }
+}
+
+/* ── Contact Capture ───────────────────────────────────────── */
+.card--contact {
+  text-align: center;
+  padding: 48px 44px 40px;
+}
+
+@media (max-width: 520px) {
+  .card--contact { padding: 36px 24px 32px; }
+}
+
+.contact-icon {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.contact-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--mcb-azul);
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  font-family: var(--font-brand);
+}
+
+.contact-sub {
+  font-size: 14.5px;
+  color: var(--mcb-gris-medio);
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.contact-form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 4px;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mcb-gris-medio);
+}
+
+.contact-optional {
+  font-weight: 400;
+  color: var(--mcb-gris-suave);
+  font-size: 12px;
+}
+
+.contact-check-wrap {
+  padding: 14px 16px;
+  background: var(--mcb-azul-xlight);
+  border: 1.5px solid var(--mcb-gris-borde);
+  border-radius: var(--r-btn);
+}
+
+.contact-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.contact-check-input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--mcb-azul);
+  cursor: pointer;
+}
+
+.contact-check-text {
+  font-size: 13px;
+  color: var(--mcb-gris-texto);
+  line-height: 1.55;
+}
+
+.contact-privacy {
+  font-size: 12px;
+  color: var(--mcb-gris-suave);
+  margin-top: 20px;
+  line-height: 1.55;
+}
+
+/* ── Budget Widget ─────────────────────────────────────────── */
+.budget-widget {
+  background: linear-gradient(135deg, #1D3885 0%, #2B4FAF 100%);
+  border-radius: 16px;
+  padding: 24px 26px 22px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
+.budget-widget-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.60);
+  margin-bottom: 10px;
+}
+
+.budget-range {
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  font-family: var(--font-brand);
+}
+
+.budget-range-unit {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.70;
+  letter-spacing: 0;
+}
+
+.budget-sub {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.68);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.budget-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.budget-meta-pill {
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ── Summary recommendation block ──────────────────────────── */
+.summary-recomendacion {
+  background: linear-gradient(135deg, var(--mcb-azul-light) 0%, var(--mcb-verde-light) 100%);
+  border: 1.5px solid var(--mcb-gris-borde);
+  border-left: 4px solid var(--mcb-azul);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 32px;
+}
+
+.summary-recomendacion-text {
+  font-size: 14.5px;
+  color: var(--mcb-gris-texto);
+  line-height: 1.75;
+  font-style: italic;
 }
 
 /* ── Print ─────────────────────────────────────────────────── */
