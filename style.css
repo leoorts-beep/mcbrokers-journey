@@ -1712,6 +1712,69 @@ body {
 }
 
 /* ── Print ─────────────────────────────────────────────────── */
+/* ── Hook screen ─────────────────────────────────────────────────────────── */
+
+.card--hook {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  padding: 48px 36px 36px;
+  min-height: 520px;
+}
+
+.hook-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.hook-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mcb-gris-suave);
+  margin-bottom: 0;
+}
+
+.hook-question-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.hook-question {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--mcb-gris-texto);
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+  max-width: 400px;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.hook-cta {
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.hook-cta--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ── /Hook screen ────────────────────────────────────────────────────────── */
+
 @media print {
   .header,
   .progress-container,

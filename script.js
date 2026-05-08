@@ -102,6 +102,7 @@ const STEPS = {
   // ── Pantallas especiales ───────────────────────────────────────────────────
 
   landing: { id: 'landing', type: 'landing' },
+  hook:    { id: 'hook',    type: 'hook-screen' },
 
   welcome: {
     id: 'welcome', type: 'client-type',
@@ -676,7 +677,7 @@ const STEPS = {
 
 // ── Rutas ─────────────────────────────────────────────────────────────────────
 
-const COMMON_PATH = ['landing', 'welcome', 'name'];
+const COMMON_PATH = ['landing', 'hook', 'welcome', 'name'];
 
 const PROFILE_PATHS = {
   familia:     ['fam_composicion', 'fam_etapa', 'fam_preocupacion', 'ingreso_anual', 'gasto_recurrente'],
@@ -705,7 +706,7 @@ const state = {
 function currentStep() { return STEPS[state.fullPath[state.currentIndex]]; }
 function pause(ms)     { return new Promise(r => setTimeout(r, ms)); }
 
-const NON_QUESTION_TYPES = ['landing', 'client-type', 'trust-screen', 'contact-capture', 'loading-screen', 'coverage-chart', 'summary'];
+const NON_QUESTION_TYPES = ['landing', 'hook-screen', 'client-type', 'trust-screen', 'contact-capture', 'loading-screen', 'coverage-chart', 'summary'];
 function isQuestion(s) { return !NON_QUESTION_TYPES.includes(s.type); }
 
 function progressInfo() {
@@ -1043,6 +1044,7 @@ function render() {
   }
 
   if      (step.type === 'landing')          app.innerHTML = renderLanding();
+  else if (step.type === 'hook-screen')      app.innerHTML = renderHookScreen();
   else if (step.type === 'client-type')      app.innerHTML = renderClientType(step);
   else if (step.type === 'trust-screen')     app.innerHTML = renderTrustScreen();
   else if (step.type === 'coverage-visual')  app.innerHTML = renderCoverageVisual(step);
@@ -1055,6 +1057,7 @@ function render() {
   updateProgress();
   focusInput();
 
+  if (step.type === 'hook-screen')    requestAnimationFrame(startHookAnimation);
   if (step.type === 'loading-screen') requestAnimationFrame(startLoadingAnimation);
   if (step.type === 'coverage-chart') requestAnimationFrame(startChartAnimation);
 }
@@ -1103,6 +1106,75 @@ function renderLanding() {
       </button>
     </div>
   `;
+}
+
+// ── Hook ──────────────────────────────────────────────────────────────────────
+
+const HOOK_QUESTIONS = [
+  '¿Tus ahorros podrían soportar lo inesperado?',
+  '¿Tu salud está respaldada si llega una emergencia?',
+  '¿Lo que has construido seguirá siendo tuyo, pase lo que pase?'
+];
+
+function renderHookScreen() {
+  return `
+    <div class="card card--hook">
+      <div class="hook-body">
+        <p class="hook-label">Antes de comenzar, reflexiona…</p>
+        <div class="hook-question-wrap">
+          <p class="hook-question" id="hookQuestion"></p>
+        </div>
+        <button class="btn btn--primary btn--large hook-cta" id="hookCta" onclick="handleNext()">
+          Quiero estar preparado
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function startHookAnimation() {
+  const el  = document.getElementById('hookQuestion');
+  const btn = document.getElementById('hookCta');
+  if (!el || !btn) return;
+
+  let i = 0;
+
+  function showQuestion() {
+    if (i >= HOOK_QUESTIONS.length) {
+      btn.classList.add('hook-cta--visible');
+      return;
+    }
+
+    // Entrada: fade in + sube desde abajo
+    el.style.transition = 'none';
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(18px)';
+    el.textContent      = HOOK_QUESTIONS[i];
+    void el.offsetWidth;
+    el.style.transition = 'opacity 900ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1)';
+    el.style.opacity    = '1';
+    el.style.transform  = 'translateY(0)';
+
+    i++;
+
+    if (i < HOOK_QUESTIONS.length) {
+      // Salida: fade out + sube
+      setTimeout(() => {
+        el.style.transition = 'opacity 650ms ease, transform 650ms ease';
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(-12px)';
+        setTimeout(showQuestion, 700);
+      }, 3000);
+    } else {
+      // Última pregunta: se queda y aparece el botón
+      setTimeout(showQuestion, 3200);
+    }
+  }
+
+  showQuestion();
 }
 
 // ── Tipo de cliente ───────────────────────────────────────────────────────────
@@ -1824,7 +1896,7 @@ function handleBack() {
 function handleNext() {
   const step = currentStep();
 
-  if (['landing', 'trust-screen', 'loading-screen', 'coverage-chart'].includes(step.type)) {
+  if (['landing', 'hook-screen', 'trust-screen', 'loading-screen', 'coverage-chart'].includes(step.type)) {
     goTo(state.currentIndex + 1, 'forward');
     return;
   }
